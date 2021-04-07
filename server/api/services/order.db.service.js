@@ -11,10 +11,7 @@ const sequelize = new Sequelize('postgres://vsipyxyxsvbzvd:7287047596bf53db6d60d
 {
   dialect: "postgres",
   dialectOptions: {
-    "ssl" : {
-      required: true,
-      rejectUnauthorized: false
-    }
+    "ssl" : true
   }
 });
 import define_models from '../../common/order';
