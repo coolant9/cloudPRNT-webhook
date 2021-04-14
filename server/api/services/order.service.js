@@ -62,7 +62,7 @@ class OrderService {
     
     const ordersPrint =  orders.map(order=>{
       const olines = flatten(order.toJSON());
-      console.log(olines);
+      // console.log(olines);
       for (let key in olines){
         if((reserved.filter(r=>indent(key).indexOf(r)!=-1)).length===0){
           lines.push(`${indent(key)}: ${olines[key]}`);

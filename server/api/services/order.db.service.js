@@ -17,10 +17,12 @@ class OrderDatabase {
       }
       sequelize.sync().then(l.info("Schema created"));
     }
+
     async all(){
       const orders = await sequelize.models.order.findAll();
       return orders;
     }
+
     async insert(order) {
       const o = await sequelize.models.order.create(order, {
         include: [
@@ -28,12 +30,25 @@ class OrderDatabase {
       });
       return o;
     }
+
     async findOrderTypes(type){
       const newOrders = await sequelize.models.order.findAll({
         where: {
           printStatus: type
         },
-        include: [{model: sequelize.models.product, include: [sequelize.models.option]}]
+        oder: [
+          [sequelize.literal("options.createdAt"), "ASC"]
+        ],
+        include: [
+          {
+            model: sequelize.models.product, 
+            include: [
+              {
+                model: sequelize.models.option,
+                as: 'options',
+                required: true
+              }]
+          }]
       });
       return newOrders;
     }
