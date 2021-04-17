@@ -15,7 +15,7 @@ export class controller{
                     options: item.customFields.map(cf=>{
                         return {name: cf.name,
                         value: cf.displayValue}
-                    }).filter(o=>o.value!==null && o.value!=="")
+                    }).filter(o => [false, "false", "none", null, ""].indexOf(o.value) == -1)
                 }
             })
         });
